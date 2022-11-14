@@ -1,0 +1,23 @@
+.icon{
+    font-size: 50px;
+    padding: 20px;
+}
+a.nav{
+    font-size: 30px;
+    padding: 20px;
+    padding-left: 30px;
+}
+h1{
+    font-size: 20px;
+}
+body{
+    font-family: Arial;
+    background-color: white;
+}
+.main{
+    padding-left: 40px;
+    padding-top: 20px;
+}
+div.res{
+    border: 2px solid black
+}

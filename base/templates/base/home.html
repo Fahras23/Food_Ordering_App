@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="home-container">
+    <div></div>
+    <div class="main">
+        {% for restaurant in restaurants %}
+            <div class="box-border h-32 w-45 p-4 border-4">
+                <h2 class="text-xl">{{ restaurant.name }}</h2>
+                <small>{{ restaurant.location }}</small>
+                <br>
+                <br>
+                <a href="{% url 'restaurant' restaurant.id %}">Check</a>
+            
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock content %}
