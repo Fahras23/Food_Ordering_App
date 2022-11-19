@@ -3,16 +3,25 @@
 
 <div class="grid grid-cols-5">
 
-<div class="h-auto col-span-1 bg-blue-300"></div>
-
-<div class="col-span-4">
-{% for item in items %}
-<div class="border border-sky-700 m-3 p-4 w-80 h-36 rounded-md text-lg">
-    <h2 class="pb-2">{{ item.name }}
-    <h2 class="pb-3">{{ item.price }}</h2> 
-    <a href="" class="bg-sky-200 hover:bg-sky-600 hover:text-white rounded-md p-1.5 mt-3">Add</a>
+<div class="col-span-1 bg-blue-300 p-4">
+    <div>
+        <h1 class="text-xl">{{ order.user.username }}'s Order:</h1>
+        <ul>
+        {% for item in order_items %}
+            <li>{{ item }}</li>
+        {% endfor %}
+        </ul class="">
+        <a href="" class="bg-sky-200 hover:bg-sky-600 hover:text-white rounded-md p-1">Order</a>
+    </div>
 </div>
-{% endfor %}
+<div class="col-span-3">
+    {% for item in items %}
+        <div class="border border-sky-700 m-3 p-4 w-80 h-36 rounded-md text-lg">
+            <h2 class="pb-2">{{ item.name }}
+            <h2 class="pb-3">{{ item.price }}</h2> 
+            <a href="{% url 'order' item.id %}" class="bg-sky-200 hover:bg-sky-600 hover:text-white rounded-md p-1.5 mt-3">Add</a>
+        </div>
+    {% endfor %}
 </div>
 
 </div>
