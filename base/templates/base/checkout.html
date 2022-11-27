@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% block content %}
+<div class="p-8 text-xl">
+    {% for items in order_items %}
+        {% if items.quanity_for_order > 0 %}
+            {{ items.quanity_for_order }}x
+        {% endif %}
+        {{ items }} {{ items.price }}
+</br>
+    {% endfor %}
+
+    {% if order.combined_price > 0 %}
+        Delivery: {{ order.delivery_price }}
+</br>
+        <span class="">Price: {{ order.combined_price }}</span>
+    {% endif %}
+</br>
+<a href="">
+    <div class="border border-stone-500 rounded-md m-2 p-3 w-20">
+       Order
+    </div>
+</a>
+</div>
+{% endblock content %}

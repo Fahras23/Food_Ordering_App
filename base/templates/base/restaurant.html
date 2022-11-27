@@ -1,26 +1,39 @@
 {% extends 'main.html' %}
 {% block content %}
 
-<div class="grid grid-cols-5">
+<div class="grid grid-cols-5 h-96 max-h-screen">
 
-<div class="col-span-1 bg-blue-300 p-4">
+<div class="col-span-1 bg-[#94a3b8] bg-opacity-78 p-5">
     <div>
-        <h1 class="text-xl">{{ order.user.username }}'s Order:</h1>
+        <h1 class="text-2xl pb-3">{{ order.user.username }}'s Order:</h1>
         <ul>
+        <form method="post">
+        {% csrf_token %}
         {% for item in order_items %}
-            <li>{{ item }}</li>
+            <li class="text-lg">
+                {% if item.quanity_for_order > 0 %}
+                {{ item.quanity_for_order }} x
+                {% endif %}
+                {{ item }}
+                {{ item.price }}
+            </li>
+            <button class="p-3 text-sm" name="remove-from-order" value="{{item.id}}">remove</button>
         {% endfor %}
+        </form>
         </ul class="">
-        <a href="" class="bg-sky-200 hover:bg-sky-600 hover:text-white rounded-md p-1">Order</a>
     </div>
 </div>
 <div class="col-span-3">
     {% for item in items %}
-        <div class="border border-sky-700 m-3 p-4 w-80 h-36 rounded-md text-lg">
+    <form method="post">
+    {% csrf_token %}
+    <button name="add-to-order" value="{{item.id}}">
+        <div class="border border-slate-300 m-3 p-4 w-80 h-24 rounded-md text-lg hover:border-slate-500">
             <h2 class="pb-2">{{ item.name }}
             <h2 class="pb-3">{{ item.price }}</h2> 
-            <a href="{% url 'order' item.id %}" class="bg-sky-200 hover:bg-sky-600 hover:text-white rounded-md p-1.5 mt-3">Add</a>
         </div>
+    </button>
+    </form>
     {% endfor %}
 </div>
 

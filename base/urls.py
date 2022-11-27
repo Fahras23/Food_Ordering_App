@@ -6,6 +6,7 @@ urlpatterns = [
     path('restaurant/<str:pk>',views.restaurant,name='restaurant'),
     path('orders/',views.orders,name='orders'),
     path('account/',views.account,name='account'),
-    path('order/<str:pk>',views.order,name='order'),
+    path('checkout/',views.checkout,name='checkout'),
+    
     
 ]
