@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Restaurant, Item, Order
+from .models import Restaurant, Item, Order, OrderItem
 from django.http import HttpResponseRedirect
 # Create your views here.
 
@@ -18,7 +18,7 @@ def restaurant(request,pk):
         data = request.POST
         if 'add-to-order' in request.POST:
             data = data['add-to-order']
-            item = Item.objects.filter(id=data)[0]
+            item = OrderItem.objects.filter(id=data)[0]
             order = Order.objects.filter(pk=1)[0]
             if order and item:
                 #adding items depending on quanity
@@ -32,7 +32,7 @@ def restaurant(request,pk):
         
         elif "remove-from-order" in data:
             data = data["remove-from-order"]
-            item = Item.objects.filter(id=data)[0]
+            item = OrderItem.objects.filter(id=data)[0]
             order = Order.objects.filter(pk=1)[0]
             if item and order and item.quanity_for_order > 0:
                 item.quanity_for_order -= 1
@@ -53,13 +53,24 @@ def account(request):
 def checkout(request):
     order = Order.objects.filter(pk=1)[0]
     order_items = order.items.all()
+    if request.method == "POST":
+        data = request.POST
+        data = data["remove-from-order"]
+        item = OrderItem.objects.filter(id=data)[0]
+        order = Order.objects.filter(pk=1)[0]
+        if item and order and item.quanity_for_order > 0:
+            item.quanity_for_order -= 1
+            if item.quanity_for_order == 0:
+                order.items.remove(item)
+            item.save()
     #delivery 3km for 3 each will add gmaps api
     order.delivery_price = 3*3
     order.save()
     #calculating price for products
     price = 0
     for item in order_items:
-        price += item.quanity_for_order * item.price
+        if item:
+            price += item.quanity_for_order * item.items.price
     order.combined_price = price + order.delivery_price
     order.save()
     context = {'order_items':order_items,'order':order}

@@ -1,9 +1,9 @@
 {% extends 'main.html' %}
 {% block content %}
+<div class="items-center">
+<div class="grid grid-cols-5 fixed h-full w-auto">
 
-<div class="grid grid-cols-5 h-96 max-h-screen">
-
-<div class="col-span-1 bg-[#94a3b8] bg-opacity-78 p-5">
+<div class="col-span-1 bg-[#94a3b8] bg-opacity-78 p-5 relative left-0">
     <div>
         <h1 class="text-2xl pb-3">{{ order.user.username }}'s Order:</h1>
         <ul>
@@ -23,7 +23,7 @@
         </ul class="">
     </div>
 </div>
-<div class="col-span-3">
+<div class="col-span-3 content-center">
     {% for item in items %}
     <form method="post">
     {% csrf_token %}
@@ -38,5 +38,5 @@
 </div>
 
 </div>
-
+</div>
 {% endblock content %}

@@ -30,14 +30,20 @@ class Item(models.Model):
         choices=TYPES_OF_ITEMS,
         default='food',
     )
-    quanity_for_order = models.DecimalField(max_digits=2,decimal_places=0)
+    
 
     def __str__(self):
         return self.name
 
+class OrderItem(models.Model):
+    items = models.ForeignKey(Item,on_delete=models.SET_NULL,null=True)
+    quanity_for_order = models.DecimalField(max_digits=2,decimal_places=0)
+    def __str__(self):
+        return self.items.name
+
 class Order(models.Model):
     user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
-    items = models.ManyToManyField(Item)
+    items = models.ManyToManyField(OrderItem)
     combined_price = models.DecimalField(max_digits=10,decimal_places=2)
     delivery_price = models.DecimalField(max_digits=10,decimal_places=2)
     street = models.TextField(max_length=100)

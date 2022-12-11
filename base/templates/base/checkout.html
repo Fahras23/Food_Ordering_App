@@ -6,10 +6,15 @@
             {{ items.quanity_for_order }}x
         {% endif %}
         {{ items }} {{ items.price }}
+        <form method="post">
+            {% csrf_token %}
+            <button class="text-sm" name="remove-from-order" value="{{items.id}}">remove</button>
+            
+        </form>
 </br>
     {% endfor %}
 
-    {% if order.combined_price > 0 %}
+    {% if order.combined_price > order.delivery_price %}
         Delivery: {{ order.delivery_price }}
 </br>
         <span class="">Price: {{ order.combined_price }}</span>
