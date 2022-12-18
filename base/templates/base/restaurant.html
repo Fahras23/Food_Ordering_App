@@ -1,9 +1,25 @@
 {% extends 'main.html' %}
 {% block content %}
 <div class="items-center">
-<div class="grid grid-cols-5 fixed h-full w-auto">
+<div class="grid grid-cols-5 w-auto h-full">
 
-<div class="col-span-1 bg-[#94a3b8] bg-opacity-78 p-5 relative left-0">
+<div class="col-span-1 bg-[#90acd3] h-screen p-5 rounded-lg">
+    <h1 class="text-2xl">Categories:</h1>
+</div>
+<div class="col-span-3 content-center">
+    {% for item in items %}
+    <form method="post">
+    {% csrf_token %}
+    <button name="add-to-order" value="{{item.id}}">
+        <div class="border border-slate-300 m-3 p-4 w-80 h-24 rounded-md text-lg hover:border-slate-500">
+            <h2 class="pb-2">{{ item.name }}
+            <h2 class="pb-3">{{ item.price }}</h2> 
+        </div>
+    </button>
+    </form>
+    {% endfor %}
+</div>
+<div class="col-span-1 content-baseline bg-[#90acd3] bg-opacity-78 p-5 h-screen rounded-lg">
     <div>
         <h1 class="text-2xl pb-3">{{ order.user.username }}'s Order:</h1>
         <ul>
@@ -23,20 +39,6 @@
         </ul class="">
     </div>
 </div>
-<div class="col-span-3 content-center">
-    {% for item in items %}
-    <form method="post">
-    {% csrf_token %}
-    <button name="add-to-order" value="{{item.id}}">
-        <div class="border border-slate-300 m-3 p-4 w-80 h-24 rounded-md text-lg hover:border-slate-500">
-            <h2 class="pb-2">{{ item.name }}
-            <h2 class="pb-3">{{ item.price }}</h2> 
-        </div>
-    </button>
-    </form>
-    {% endfor %}
-</div>
-
 </div>
 </div>
 {% endblock content %}
