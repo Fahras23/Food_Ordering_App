@@ -1,16 +1,33 @@
 {% extends 'main.html' %}
 {% block content %}
 <div class="grid grid-cols-5 h-full">
-    <div class="col-span-1 bg-[#90acd3] h-screen p-5">
+    <div class="col-span-1 bg-[#90acd3] h-screen p-5 rounded-md">
         <h1 class="text-2xl">Categories:</h1>
+        <form method="post">
+        {% csrf_token %}
+        {% for restaurant_type in types_of_restaurants %}
+        <ul class="text-xl">
+        <a href="{% url 'home' %}?q={{restaurant_type.0}}">{{restaurant_type.0}}</a>
+        </ul>
+        {% endfor %}
+        </form>
+        <h1 class="text-2xl">Prices:</h1>
+        <form method="post">
+        {% csrf_token %}
+        {% for value in restaurant_values %}
+        <ul class="text-xl">
+        <a href="{% url 'home' %}?q={{value.0}}">{{value.0}}</a>
+        </ul>
+        {% endfor %}
+        </form>
     </div>
     <div class="main col-span-4">
         {% for restaurant in restaurants %}
-            <div class="box-border h-36 w-45 p-3 border-4 mb-4 m-3 shadow-lg border-slate-500 rounded-md">
+            <div class="box-border h-36 w-45 p-3 border-4 mb-4 m-3 shadow-lg border-slate-500 rounded-xl">
                 <h2 class="text-2xl">{{ restaurant.name }}</h2>
                 <small>{{ restaurant.location }}</small>
-                
                 <br>
+                <small class="">{{ restaurant.value }}</small> 
                 <br>
                 <a href="{% url 'restaurant' restaurant.id %}">Check</a>
             

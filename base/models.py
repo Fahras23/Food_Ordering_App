@@ -7,6 +7,19 @@ TYPES_OF_ITEMS = (
        ('drink', ('drink')),
    )
 
+TYPES_OF_RESTAURANTS = (
+    ('Asian', ('Asian')),
+    ('Italian', ('Italian')),
+    ('Gregorian', ('Gregorian')),
+    ('American', ('American')),
+    ('Polish', ('Polish')),
+)
+VALUES = (
+    ('$', (1)),
+    ('$$', (2)),
+    ('$$$', (3)),
+)
+
 # Create your models here.
 class Restaurant(models.Model):
     name = models.CharField(max_length=50)
@@ -14,7 +27,16 @@ class Restaurant(models.Model):
     location = models.CharField(max_length=30)
     description = models.TextField(max_length=100)
     addition_date = models.DateTimeField(auto_now_add=True)
-
+    type = models.CharField(
+        max_length=32,
+        choices=TYPES_OF_RESTAURANTS,
+        default='default',
+    )
+    value=models.CharField(
+        max_length=32,
+        choices=VALUES,
+        default='default',
+    )
     class Meta:
         ordering = ['-addition_date']
 

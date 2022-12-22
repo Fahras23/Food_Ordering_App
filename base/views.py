@@ -2,11 +2,24 @@ from django.shortcuts import render, redirect
 from .models import Restaurant, Item, Order, OrderItem
 from django.http import HttpResponseRedirect
 # Create your views here.
+from .models import TYPES_OF_RESTAURANTS,VALUES
 
 def home(request):
-    restaurant_list = Restaurant.objects.all()
-    context = {'restaurants':restaurant_list}
-
+    entry = request.GET.get('q')
+    types_of_restaurants = TYPES_OF_RESTAURANTS
+    restaurant_values = VALUES
+    if entry[0]=="$":
+        restaurant_list = Restaurant.objects.filter(value=entry)
+    elif entry:
+        restaurant_list = Restaurant.objects.filter(type=entry)
+    else:
+        restaurant_list = Restaurant.objects.all()
+       
+    context = {'restaurants':restaurant_list,
+    'types_of_restaurants': types_of_restaurants,
+    'restaurant_values': restaurant_values,
+    }
+    
     return render(request,'base/home.html',context)
     
 def restaurant(request,pk):
