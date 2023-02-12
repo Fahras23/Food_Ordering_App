@@ -5,19 +5,22 @@ from django.http import HttpResponseRedirect
 from .models import TYPES_OF_RESTAURANTS,VALUES
 
 def home(request):
-    entry = request.GET.get('q')
+    entry_type = request.GET.get('t')
+    entry_value = request.GET.get('v')
     types_of_restaurants = TYPES_OF_RESTAURANTS
     restaurant_values = VALUES
-    if entry[0]=="$":
-        restaurant_list = Restaurant.objects.filter(value=entry)
-    elif entry:
-        restaurant_list = Restaurant.objects.filter(type=entry)
-    else:
+    
+    if entry_value:
+        restaurant_list = Restaurant.objects.filter(value=entry_value)
+    elif entry_type:
+        restaurant_list = Restaurant.objects.filter(type=entry_type)
+    else:  
         restaurant_list = Restaurant.objects.all()
-       
-    context = {'restaurants':restaurant_list,
-    'types_of_restaurants': types_of_restaurants,
-    'restaurant_values': restaurant_values,
+
+    context = {
+        'restaurants':restaurant_list,
+        'types_of_restaurants': types_of_restaurants,
+        'restaurant_values': restaurant_values,
     }
     
     return render(request,'base/home.html',context)
@@ -25,7 +28,9 @@ def home(request):
 def restaurant(request,pk):
     #filtering items for specific restaurant id
     item_list = Item.objects.filter(place__id=pk)
-    order = Order.objects.filter(user__username="krzysztof")[0]
+    order = Order.objects.filter(user__username="krzysztof")
+    print(order)
+    order = order[0]
     #adding and removing in order with buttons
     if request.method == "POST":
         data = request.POST
@@ -34,12 +39,9 @@ def restaurant(request,pk):
             item = OrderItem.objects.filter(id=data)[0]
             order = Order.objects.filter(pk=1)[0]
             if order and item:
-                #adding items depending on quanity
+                #adding items
                 order.items.add(item)
-                if item.quanity_for_order == 0:
-                    item.quanity_for_order += 1
-                elif item.quanity_for_order >=1:
-                    item.quanity_for_order +=1
+                item.quanity_for_order += 1
                 item.save()
                 print(item.quanity_for_order)
         

@@ -7,7 +7,7 @@
         {% csrf_token %}
         {% for restaurant_type in types_of_restaurants %}
         <ul class="text-xl">
-        <a href="{% url 'home' %}?q={{restaurant_type.0}}">{{restaurant_type.0}}</a>
+        <a href="{% url 'home' %}?t={{restaurant_type.0}}">{{restaurant_type.0}}</a>
         </ul>
         {% endfor %}
         </form>
@@ -16,7 +16,7 @@
         {% csrf_token %}
         {% for value in restaurant_values %}
         <ul class="text-xl">
-        <a href="{% url 'home' %}?q={{value.0}}">{{value.0}}</a>
+        <a href="{% url 'home' %}?v={{value.0}}">{{value.0}}</a>
         </ul>
         {% endfor %}
         </form>
