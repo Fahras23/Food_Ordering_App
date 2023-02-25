@@ -21,10 +21,32 @@ VALUES = (
 )
 
 # Create your models here.
+class UserAdress(models.Model):
+    user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
+    street = models.CharField(max_length=100,blank=True)
+    apartment = models.CharField(max_length=100,blank=True)
+    city = models.CharField(max_length=30,blank=True)
+    country = models.CharField(max_length=30,blank=True)
+    postcode = models.CharField(max_length=30,blank=True)
+    comments = models.CharField(max_length=30,blank=True,null=True)
+    def __str__(self):
+        return f"{self.user} address"
+
+class RestaurantLocation(models.Model):
+    street = models.CharField(max_length=100,blank=True)
+    city = models.CharField(max_length=30,blank=True)
+    country = models.CharField(max_length=30,blank=True)
+    postcode = models.CharField(max_length=30,blank=True)
+    xmap = models.DecimalField(max_digits=10,decimal_places=4)
+    ymap = models.DecimalField(max_digits=10,decimal_places=4)
+    
+    def __str__(self):
+        return self.street
+
 class Restaurant(models.Model):
+    location = models.ForeignKey(RestaurantLocation,on_delete=models.SET_NULL,null=True)
     name = models.CharField(max_length=50)
     type = models.CharField(max_length=30)
-    location = models.CharField(max_length=30)
     description = models.TextField(max_length=100)
     addition_date = models.DateTimeField(auto_now_add=True)
     type = models.CharField(
@@ -53,23 +75,21 @@ class Item(models.Model):
         default='food',
     )
     
-
     def __str__(self):
         return self.name
 
 class OrderItem(models.Model):
     items = models.ForeignKey(Item,on_delete=models.SET_NULL,null=True)
     quanity_for_order = models.DecimalField(max_digits=2,decimal_places=0)
+
     def __str__(self):
         return self.items.name
 
 class Order(models.Model):
     user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
-    items = models.ManyToManyField(OrderItem)
-    combined_price = models.DecimalField(max_digits=10,decimal_places=2)
-    delivery_price = models.DecimalField(max_digits=10,decimal_places=2)
-    street = models.TextField(max_length=100)
-    city = models.TextField(max_length=100)
- 
+    items = models.ManyToManyField(OrderItem,blank=True)
+    combined_price = models.DecimalField(max_digits=10,decimal_places=2,null=True,blank=True)
+    delivery_price = models.DecimalField(max_digits=10,decimal_places=2,null=True,blank=True)
+    completed = models.BooleanField(null=True)
     def __str__(self):
         return f'{self.user} order nr. {self.id} '

@@ -139,3 +139,6 @@ INTERNAL_IPS = [
     "127.0.0.1",
 ]
 NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
+
+GOOGLE_API_KEY = "AIzaSyDnjiBsU-5znlDE3WiQbk-WZjJIKsEgieI"
+BASE_COUNTRY = "PL"
