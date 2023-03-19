@@ -1,2 +1,2 @@
 # Food_Ordering_System
-Site for food orders made with django
+Main site contains list of restaurants with filters
