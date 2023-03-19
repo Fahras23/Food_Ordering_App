@@ -1,2 +1,4 @@
 # Food_Ordering_System
-Main site contains list of restaurants with filters
+Django used as main backend software contain all templates for site
+Tailwind used as style tech
+
