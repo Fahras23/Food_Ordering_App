@@ -1,0 +1,10 @@
+{% extends 'main.html' %}
+{% block content %}
+<form method="POST" action="" class="p-36 text-2xl border-2 border-black">
+    <! -- csrf token to secure form from malicious software -->
+    {% csrf_token %}
+    <! -- as_p adds paragraph for every form block -->
+    {{form.as_p}}
+    <input type="Submit" value="Submit"/>
+</form>
+{% endblock content %}
