@@ -131,7 +131,15 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+STATIC_URL = '/static/'
 
+STATIC_DIRS = [
+    os.path.join(BASE_DIR,'static')
+]
+
+MEDIA_URL = '/images/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')
 
 TAILWIND_APP_NAME = 'theme'
 
@@ -142,3 +150,4 @@ NPM_BIN_PATH = r"C:\Program Files\nodejs\npm.cmd"
 
 GOOGLE_API_KEY = "AIzaSyDnjiBsU-5znlDE3WiQbk-WZjJIKsEgieI"
 BASE_COUNTRY = "PL"
+

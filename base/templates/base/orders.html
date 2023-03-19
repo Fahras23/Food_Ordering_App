@@ -1,4 +1,20 @@
 {% extends 'main.html' %}
 {% block content %}
-<h1>orders</h1>
+<div class="text-5xl text-center">Orders</div>
+<div class="grid grid-cols-5">
+    <div class="col-span-1"></div>
+    <div class="col-span-3">
+        {% for order in orders %}
+            <h1 class="text-2xl p-3">{{ order }}</h1>
+            {% for item in order_items %}
+                {% if item.order == order %}
+                    <h1>{{ item }}</h1>
+                {% endif %}
+            {% endfor %}
+            <h1>{{ order.combined_price }}</h1>
+        {% endfor %}
+    </div>
+    <div class="col-span-1"></div>
+</div>
+
 {% endblock content %}

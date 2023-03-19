@@ -1,7 +1,9 @@
 {% extends 'main.html' %}
 {% block content %}
+<div class="text-5xl text-center">Restaurants</div>
 <div class="grid grid-cols-6 h-full">
-    <div class="col-span-1 bg-[#90acd3] h-screen p-5 rounded-md">
+    <div class="main col-span-1"></div>
+    <div class="col-span-1 bg-[#90acd3] h-screen p-5 rounded-md m-3">
         <h1 class="text-2xl">Categories:</h1>
         <form method="post">
         {% csrf_token %}
@@ -34,8 +36,6 @@
             </div>
         {% endfor %}
     </div>
-    <div class="main col-span-2">
-
-    </div>
+    <div class="main col-span-1"></div>
     </div>
 {% endblock content %}

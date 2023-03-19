@@ -1,44 +1,50 @@
 {% extends 'main.html' %}
 {% block content %}
 <div class="items-center">
-<div class="grid grid-cols-5 w-auto h-full">
-
-<div class="col-span-1 bg-[#90acd3] h-screen p-5 rounded-lg">
-    <h1 class="text-2xl">Categories:</h1>
-</div>
-<div class="col-span-3 content-center">
-    {% for item in items %}
-    <form method="post">
-    {% csrf_token %}
-    <button name="add-to-order" value="{{item.id}}">
-        <div class="border border-slate-300 m-3 p-4 w-80 h-24 rounded-md text-lg hover:border-slate-500">
-            <h2 class="pb-2">{{ item.name }}
-            <h2 class="pb-3">{{ item.price }}</h2> 
+    <div class="text-center text-3xl p-3">
+        {{ items.0.place }}
+    </div>
+    <div class="grid grid-cols-7">
+        <div class="col-span-1"></div>
+        <div class="col-span-1 bg-[#90acd3] p-5 rounded-lg h-screen">
+            <h1 class="text-2xl">Categories:</h1>
         </div>
-    </button>
-    </form>
-    {% endfor %}
-</div>
-<div class="col-span-1 content-baseline bg-[#90acd3] bg-opacity-78 p-5 h-screen rounded-lg">
-    <div>
+        <div class="col-span-3">
+            {% for item in items %}
+            <form method="post">
+            {% csrf_token %}
+            <button name="add-to-order" value="{{item.id}}">
+                <div class="border border-slate-300 m-3 p-4 w-80 h-52 rounded-md text-lg hover:border-slate-500">
+                    {% if item.image %}
+                    <img class="object-cover h-28 w-96" src="{{item.image.url}}">
+                    {% endif %}
+                    <h2 class="pb-2">{{ item.name }}
+                    <h2 class="pb-3">{{ item.price }}</h2> 
+                </div>
+            </button>
+            </form>
+            {% endfor %}
+        </div>
+    <div class="col-span-1 bg-[#90acd3] bg-opacity-78 p-5 rounded-lg">
         <h1 class="text-2xl pb-3">{{ order.user.username }}'s Order:</h1>
         <ul>
         <form method="post">
         {% csrf_token %}
         {% for item in order_items %}
             <li class="text-lg">
-                {% if item.quanity_for_order > 0 %}
-                {{ item.quanity_for_order }} x
+                {% if item.quanity > 0 %}
+                {{ item.quanity }} x
                 {% endif %}
                 {{ item }}
-                {{ item.price }}
+                {{ item.items.price }}
             </li>
-            <button class="p-3 text-sm" name="remove-from-order" value="{{item.id}}">remove</button>
+            <button class="p-3 text-sm" name="remove-from-order" value="{{item.items.id}}">remove</button>
         {% endfor %}
         </form>
-        </ul class="">
+        </ul>
     </div>
+    <div class="col-span-1"></div>
 </div>
-</div>
+
 </div>
 {% endblock content %}

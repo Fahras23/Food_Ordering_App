@@ -1,9 +1,8 @@
 from re import L
 from django.forms import ModelForm
-from Django_Course_Project.studybud.base.models import Room
-from models import Restaurant
+from .models import UserAdress
 
-class RestaurantForm(ModelForm):
+class AddressForm(ModelForm):
     class Meta:
-        model = Room
-        fields = 'all'
+        model = UserAdress
+        fields = ['street','apartment','city','country','postcode','comments']

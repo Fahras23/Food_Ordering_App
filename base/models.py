@@ -69,6 +69,7 @@ class Item(models.Model):
     place = models.ForeignKey(Restaurant, on_delete=models.SET_NULL, null=True) 
     name = models.CharField(max_length=50)
     price = models.DecimalField(max_digits=10,decimal_places=2)
+    image = models.ImageField(null=True,blank=True)
     type = models.CharField(
         max_length=32,
         choices=TYPES_OF_ITEMS,
@@ -78,18 +79,18 @@ class Item(models.Model):
     def __str__(self):
         return self.name
 
-class OrderItem(models.Model):
-    items = models.ForeignKey(Item,on_delete=models.SET_NULL,null=True)
-    quanity_for_order = models.DecimalField(max_digits=2,decimal_places=0)
-
-    def __str__(self):
-        return self.items.name
-
 class Order(models.Model):
     user = models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
-    items = models.ManyToManyField(OrderItem,blank=True)
     combined_price = models.DecimalField(max_digits=10,decimal_places=2,null=True,blank=True)
     delivery_price = models.DecimalField(max_digits=10,decimal_places=2,null=True,blank=True)
     completed = models.BooleanField(null=True)
     def __str__(self):
         return f'{self.user} order nr. {self.id} '
+
+class OrderItem(models.Model):
+    items = models.ForeignKey(Item,on_delete=models.SET_NULL,null=True)
+    order = models.ForeignKey(Order,on_delete=models.SET_NULL,null=True)
+    quanity = models.DecimalField(max_digits=2,decimal_places=0)
+
+    def __str__(self):
+        return f"{self.items.name}"
