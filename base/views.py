@@ -80,7 +80,6 @@ def restaurant(request,pk):
             try: 
                 order_item = OrderItem.objects.filter(items__id=item.id,order__id=order.id).first()    
                 quanity = order_item.quanity+1
-        
             except:
                 quanity = 1
             #check if first item exist
@@ -140,7 +139,8 @@ def account(request):
 #checkout view with google maps trace
 @login_required(login_url="login") 
 def checkout(request):
-    gmaps = googlemaps.Client(key= settings.GOOGLE_API_KEY)
+    gmaps = googlemaps.Client(key=settings.GOOGLE_API_KEY)
+    google_api_key = settings.GOOGLE_API_KEY
     order, created = Order.objects.get_or_create(user=request.user,completed=False)
     user_address = UserAdress.objects.filter(pk=1)[0]
     order_items = OrderItem.objects.filter(order__id=order.id)
@@ -207,7 +207,8 @@ def checkout(request):
         'user_location':result_user,
         'calculate_distance':calculate_distance,
         'calculate_duration':calculate_duration,
-        'user_address': user_address
+        'user_address': user_address,
+        'google_api_key': google_api_key
         }
     return render(request,'base/checkout.html',context)
 
