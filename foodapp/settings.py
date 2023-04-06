@@ -88,8 +88,12 @@ WSGI_APPLICATION = 'foodapp.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'food_app_db',
+        'USER': 'chris',
+        'PASSWORD': 'utopia3317',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
