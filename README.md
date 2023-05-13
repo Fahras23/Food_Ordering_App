@@ -1,5 +1,4 @@
 # Food_Ordering_System
-Django used as main backend software contain all templates for site
+Django based site for ordering food online
 
-Tailwind used as style tech
 
