@@ -60,8 +60,7 @@ MIDDLEWARE = [
     "django_browser_reload.middleware.BrowserReloadMiddleware",
 ]
 
-CSRF_TRUSTED_ORIGINS = ['web-production-2e4f.up.railway.app']
-CSRF_COOKIE_DOMAIN = ['web-production-2e4f.up.railway.app']
+
 
 ROOT_URLCONF = 'foodapp.urls'
 
