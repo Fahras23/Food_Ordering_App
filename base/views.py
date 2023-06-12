@@ -65,7 +65,6 @@ def home(request):
     return render(request,'base/home.html',context)
 
 #restaurant view
-@login_required(login_url="login") 
 def restaurant(request,pk):
     #filtering items for specific restaurant id
     item_list = Item.objects.filter(place__id=pk)
