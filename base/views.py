@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate,login,logout 
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.crsf import crsf_exempt
 
 from .forms import AddressForm
 from .models import Restaurant, Item, Order, OrderItem, RestaurantLocation, UserAdress
@@ -15,6 +16,7 @@ import json
 from datetime import datetime
 
 #login view
+@crsf_exempt
 def loginPage(request):
     if request.user.is_authenticated:
         return redirect('home')

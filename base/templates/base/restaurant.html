@@ -29,7 +29,6 @@
         <h1 class="text-2xl pb-3">{{ order.user.username }}'s Order:</h1>
         <ul>
         <form method="post">
-        {% csrf_token %}
         {% for item in order_items %}
             <li class="text-lg">
                 {% if item.quanity > 0 %}
