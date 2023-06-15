@@ -67,6 +67,7 @@ def home(request):
     return render(request,'base/home.html',context)
 
 #restaurant view
+@csrf_exempt
 @login_required(login_url="login") 
 def restaurant(request,pk):
     #filtering items for specific restaurant id
@@ -139,6 +140,7 @@ def account(request):
     return render(request,'base/account.html')
 
 #checkout view with google maps trace
+@csrf_exempt
 @login_required(login_url="login") 
 def checkout(request):
     gmaps = googlemaps.Client(key=settings.GOOGLE_API_KEY)
@@ -215,6 +217,7 @@ def checkout(request):
     return render(request,'base/checkout.html',context)
 
 #update address view
+@csrf_exempt
 @login_required(login_url="login") 
 def updateAddress(request):
     address = UserAdress.objects.get(id=1)

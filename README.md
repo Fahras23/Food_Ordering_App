@@ -8,3 +8,6 @@
  PG_PASSWORD=*****
 ```
 3. Install requirements
+4. Sample login credentials:
+login: test
+password: test
