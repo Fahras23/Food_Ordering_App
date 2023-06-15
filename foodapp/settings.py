@@ -35,9 +35,9 @@ ALLOWED_HOSTS = ['web-production-2e4f.up.railway.app','127.0.0.1']
 
 
 # Application definition
+ADMIN_ENABLED = False
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
 ]
+
+if ADMIN_ENABLED is True:
+    INSTALLED_APPS.append('django.contrib.admin')
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
