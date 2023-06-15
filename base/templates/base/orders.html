@@ -6,12 +6,16 @@
     <div class="col-span-3">
         {% for order in orders %}
             <h1 class="text-2xl p-3">{{ order }}</h1>
+            <h3 class="text-xl">Items:</h3>
+            <ul>
             {% for item in order_items %}
                 {% if item.order == order %}
-                    <h1>{{ item }}</h1>
+                    <li>{{ item }}</li>
                 {% endif %}
             {% endfor %}
-            <h1>{{ order.combined_price }}</h1>
+            </ul>
+            <h3 class="text-xl"></h3>
+            <p><b>Price:</b> {{ order.combined_price }} zl</p>
         {% endfor %}
     </div>
     <div class="col-span-1"></div>

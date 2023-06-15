@@ -125,9 +125,9 @@ def restaurant(request,pk):
 #user orders view
 @login_required(login_url="login") 
 def orders(request):
-    orders = Order.objects.filter(completed=True)
+    user = request.user
+    orders = Order.objects.filter(user=user,completed=True)
     order_items = OrderItem.objects.filter(order__completed=True)
-    print(order_items)
     context = {
         'orders':orders,
         'order_items':order_items

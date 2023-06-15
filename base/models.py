@@ -85,7 +85,7 @@ class Order(models.Model):
     delivery_price = models.DecimalField(max_digits=10,decimal_places=2,null=True,blank=True)
     completed = models.BooleanField(null=True)
     def __str__(self):
-        return f'{self.user} order nr. {self.id} '
+        return f'{self.user} order '
 
 class OrderItem(models.Model):
     items = models.ForeignKey(Item,on_delete=models.SET_NULL,null=True)
