@@ -6,9 +6,9 @@
 {% endblock %}
 {% block content %}
 {% if order_items %}
-<div class="grid grid-cols-4 p-12 text-xl">
+<div class="grid grid-cols-4 pt-8 text-xl">
     <div class="col-span-1"></div>
-    <div class="col span-1  border-2 border-black m-6  rounded-md pl-20 pt-10 pb-14 text-xl">
+    <div class="col span-1  border-2 border-black m-4  rounded-md pl-10 pt-14 pb-14 text-xl">
             <h1 class="text-5xl">{{ restaurant.name }} order:</h1>
         </br>
             {% for item in order_items %}
@@ -47,7 +47,7 @@
         distance: {{ calculate_distance }} km
     </br>
         time: {{ calculate_duration }} mins
-    <div id="map" style="height:400px; width: 600px;"></div>
+    <div id="map" style="height:400px; width: 600px;">
         <script>
             let map;
             function initMap() {
@@ -100,12 +100,14 @@
         
 
     </div>
+</div>
     <div class="col-span-1"></div>
 </div>
-<div>
     {% else %}
+<div>
     <h1 class="text-3xl p-4 text-center">Theres nothing in your order</h1>
-    {% endif %}
 </div>
+    {% endif %}
+
 
 {% endblock content %}

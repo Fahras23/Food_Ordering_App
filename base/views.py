@@ -146,7 +146,9 @@ def checkout(request):
     gmaps = googlemaps.Client(key=settings.GOOGLE_API_KEY)
     google_api_key = settings.GOOGLE_API_KEY
     order, created = Order.objects.get_or_create(user=request.user,completed=False)
-    user_address = UserAdress.objects.filter(pk=1)[0]
+    user_address = UserAdress.objects.filter(user=request.user)
+    if user_address:    
+        user_address = user_address[0]
     order_items = OrderItem.objects.filter(order__id=order.id)
     restaurant = None
     result_restaurant = None
@@ -220,11 +222,11 @@ def checkout(request):
 @csrf_exempt
 @login_required(login_url="login") 
 def updateAddress(request):
-    address = UserAdress.objects.get(id=1)
+    address = UserAdress.objects.get(user=request.user)
     form = AddressForm(instance=address)
     #check logged user with room user if you are allowed to edit this room
     if request.user != address.user: 
-        return HTTPResponse('You are not allowed here!')
+        return HttpResponse('You are not allowed here!')
     if request.method == "POST":
         form = AddressForm(request.POST,instance=address)
         if form.is_valid():
