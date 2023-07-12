@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
+    {% include 'navbar.html' %}
     {% if messages %}
     <ul class="text-center">
     {% for message in messages %}
@@ -22,7 +23,6 @@
     {% endfor %}
     </ul>
     {% endif %}
-    {% include 'navbar.html' %}
 <hr>
 <div class="">    
     {% block content %}

@@ -88,7 +88,7 @@ def restaurant(request,pk):
             #check if first item exist
             #check if first item is in same restaurant as second
             #add item to order or update quanity in specific item
-            if len(order.orderitem_set.all())>1:
+            if len(order.orderitem_set.all())>=1:
                 if order.orderitem_set.all()[0].items.place==item.place:
                     OrderItem.objects.update_or_create(
                         items=item,
@@ -163,7 +163,10 @@ def checkout(request):
             data = data["complete-order"]
             order_update = Order.objects.filter(id=int(data)).first()
             order_update.completed = True
-            order_update.save()                       
+            order_update.save() 
+            messages.info(request,'order completed')
+            # redirect home if order is completed
+            return redirect('/')                        
         elif 'remove-from-order' in data:
             data = data["remove-from-order"]
             item = Item.objects.filter(id=data)[0]
@@ -173,7 +176,8 @@ def checkout(request):
                 order_item.save()
             elif order_item.quanity == 1:
                 order_item.delete()
-        return redirect('/checkout/')   
+            return redirect('/checkout/')  
+         
     #order items must exist if we want to initialaze calculations on google maps
     #that shows road on map
     if order_items:
