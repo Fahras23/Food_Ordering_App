@@ -1,14 +1,14 @@
 {% extends 'main.html' %}
 {% block links %}
 <script
-    src="https://maps.googleapis.com/maps/api/js?key={{google_api_key}}&callback=initMap&v=weekly"
-    defer></script>
+    src="https://maps.googleapis.com/maps/api/js?key={{google_api_key}}&callback=initMap&v=weekly"defer>
+</script>
 {% endblock %}
 {% block content %}
 {% if order_items %}
-<div class="grid grid-cols-4 pt-8 text-xl">
+<div class="grid grid-cols-6 pt-8 text-xl">
     <div class="col-span-1"></div>
-    <div class="col span-1  border-2 border-black m-4  rounded-md pl-10 pt-14 pb-14 text-xl">
+    <div class="col-span-2  border-2 border-black m-3 rounded-md pl-10 pt-14 pb-14 text-xl">
             <h1 class="text-5xl">{{ restaurant.name }} order:</h1>
         </br>
             {% for item in order_items %}
@@ -37,12 +37,12 @@
         <a href="">
             <form method="post">
                 {% csrf_token %}
-                <button class="text-2xl border-2 p-3 rounded-lg border-black" name="complete-order" value="{{order.id}}">order</button>
+                <button class="text-2xl border-2 p-3 mt-3 rounded-lg border-black" name="complete-order" value="{{order.id}}">order</button>
             </form>
         </a>
     </div>
 
-    <div class="col span-1">
+    <div class="col-span-2">
 
         distance: {{ calculate_distance }} km
     </br>

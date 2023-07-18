@@ -34,9 +34,9 @@ DEBUG = True
 ALLOWED_HOSTS = ['web-production-2e4f.up.railway.app','127.0.0.1']
 
 
+# Admin panel switch
+ADMIN_ENABLED = True
 # Application definition
-ADMIN_ENABLED = False
-
 INSTALLED_APPS = [
     'django.contrib.auth',
     'django.contrib.contenttypes',
